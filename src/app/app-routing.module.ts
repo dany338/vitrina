@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { SelectivePreloadingStrategyService } from './selective-preloading-strategy.service';
 
 const routes: Routes = [
   {
     path: 'vitrina',
-    loadChildren: './vitrina/vitrina.module#VitrinaModule'
+    loadChildren: './vitrina/vitrina.module#VitrinaModule',
+    data: { preload: true }
   },
   {
     path: '',
@@ -17,7 +19,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       enableTracing: true, // <-- debugging purposes only
-      preloadingStrategy: PreloadAllModules
+      preloadingStrategy: SelectivePreloadingStrategyService// PreloadAllModules
     }
   )],
   exports: [RouterModule]
